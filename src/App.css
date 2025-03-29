@@ -1,0 +1,14 @@
+#root {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Noto Sans HK Variable", sans-serif;
+  background-color: var(--surface-base);
+  color: var(--text-default);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

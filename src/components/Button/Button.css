@@ -1,0 +1,33 @@
+.button {
+    background: inherit;
+    padding: 0.8em 1.6em;
+    border-radius: 8px;
+    color: var(--text-default);
+    font-weight: 500;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--elevation-low);
+    border: 2px solid var(--border-default);
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--elevation-medium);
+    border-color: var(--border-interactive);
+    color: var(--interactive-primary);
+    opacity: 0.95;
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: var(--elevation-low);
+    border-color: var(--border-emphasized);
+}
+
+.button:focus-visible {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: var(--focus-ring);
+}
