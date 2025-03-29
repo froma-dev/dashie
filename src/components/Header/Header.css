@@ -1,7 +1,15 @@
 .header {
     width: 100%;
+    height: 3rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 1rem;
+    padding: 1rem 0;
+    box-sizing: content-box;
+
+    .brand {
+        display: flex;
+
+    }
 }
