@@ -3,18 +3,16 @@
     padding: 0.5em 1.5em;
     border-radius: 8px;
     color: var(--text-default);
-    font-weight: 500;
+    font-weight: 400;
     font-family: inherit;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: var(--elevation-low);
-    border: 2px solid var(--border-default);
+    border: 1px solid var(--border-default);
 }
 
 .button:hover {
     transform: translateY(-2px);
-    box-shadow: var(--elevation-medium);
     border-color: var(--border-interactive);
     color: var(--interactive-primary);
     opacity: 0.95;
