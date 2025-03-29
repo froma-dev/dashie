@@ -1,43 +1,79 @@
 :root {
-  /* Theme colors */
+  /* Previous Theme
   --surface-base: #0a0a0f;
   --surface-raised: #13141f;
   --surface-overlay: #1e1f2e;
 
-  /* Typography */
   --text-default: #ecedee;
   --text-subdued: #a1a5b5;
   --text-disabled: #636b7d;
 
-  /* Interactive elements */
   --interactive-primary: #0072F5;
   --interactive-secondary: #7828C8;
   --state-success: #17C964;
   --state-warning: #F5A524;
   --state-error: #F31260;
 
-  /* Border colors */
   --border-subtle: #27282F;
-  /* Subtle borders for cards */
   --border-default: #2E313A;
-  /* Default borders */
   --border-emphasized: #3F4252;
-  /* Emphasized borders */
   --border-interactive: #0072F5;
-  /* Interactive element borders */
   --border-focus: #338EF7;
-  /* Focus state borders */
+  */
+
+  /* Neo Tokyo Theme colors */
+  --surface-base: #0D1117;
+  /* Deep night */
+  --surface-raised: #161B22;
+  /* Midnight building */
+  --surface-overlay: #21262D;
+  /* Neon-lit facade */
+
+  /* Typography */
+  --text-default: #F0F6FC;
+  /* Neon white */
+  --text-subdued: #C297FF;
+  /* Soft purple glow */
+  --text-disabled: #7E4FBF;
+  /* Dimmed purple */
+
+  /* Interactive elements */
+  --interactive-primary: #FF2E6D;
+  /* Neon pink */
+  --interactive-secondary: #A855F7;
+  /* Electric purple */
+  --state-success: #00F6C3;
+  /* Cyber mint */
+  --state-warning: #FFB800;
+  /* Amber lantern */
+  --state-error: #FF3358;
+  /* Hot pink alert */
+
+  /* Border colors */
+  --border-subtle: #262B32;
+  /* Dark building outline */
+  --border-default: #3F4752;
+  /* Neon frame */
+  --border-emphasized: #C297FF;
+  /* Purple highlight */
+  --border-interactive: #FF2E6D;
+  /* Neon pink glow */
+  --border-focus: #FF71A4;
+  /* Soft pink focus */
 
   /* Interactive gradients */
-  --interactive-gradient-primary: linear-gradient(135deg, #0072F5, #00B7FA);
-  --interactive-gradient-secondary: linear-gradient(135deg, #7828C8, #9750DD);
-  --interactive-gradient-success: linear-gradient(135deg, #17C964, #0DBC5A);
+  --interactive-gradient-primary: linear-gradient(135deg, #FF2E6D, #FF71A4);
+  /* Neon pink flow */
+  --interactive-gradient-secondary: linear-gradient(135deg, #A855F7, #C297FF);
+  /* Electric purple surge */
+  --interactive-gradient-success: linear-gradient(135deg, #00F6C3, #00B894);
+  /* Cyber mint pulse */
 
-  /* Elevation */
-  --elevation-low: 0 2px 4px rgba(0, 0, 0, 0.2);
-  --elevation-medium: 0 4px 8px rgba(0, 0, 0, 0.3);
-  --elevation-high: 0 8px 16px rgba(0, 0, 0, 0.4);
-  --focus-ring: 0 0 0 3px rgba(0, 114, 245, 0.4);
+  /* Elevation - with colored shadows */
+  --elevation-low: 0 2px 4px rgba(255, 46, 109, 0.1);
+  --elevation-medium: 0 4px 8px rgba(194, 151, 255, 0.15);
+  --elevation-high: 0 8px 16px rgba(194, 151, 255, 0.2);
+  --focus-ring: 0 0 0 3px rgba(255, 46, 109, 0.4);
 
   color-scheme: light dark;
   font-synthesis: none;
