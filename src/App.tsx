@@ -2,11 +2,12 @@ import "./App.css";
 import Card from "./components/Card/Card";
 import Link from "./components/Link/Link";
 import Grid from "./components/Grid/Grid";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <>
-      <h1>Dashie</h1>
+      <Header />
       <Card title="Card title" description="Card description" />
       <Link href="https://github.com/">Link</Link>
       <Grid auto>

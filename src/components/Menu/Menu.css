@@ -1,0 +1,16 @@
+.menu {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    ul {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+
+        .menu-item {
+            text-decoration: none;
+        }
+    }
+}
