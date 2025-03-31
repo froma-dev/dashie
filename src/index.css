@@ -1,79 +1,78 @@
 :root {
-  /* Previous Theme
-  --surface-base: #0a0a0f;
-  --surface-raised: #13141f;
-  --surface-overlay: #1e1f2e;
-
-  --text-default: #ecedee;
-  --text-subdued: #a1a5b5;
-  --text-disabled: #636b7d;
-
-  --interactive-primary: #0072F5;
-  --interactive-secondary: #7828C8;
-  --state-success: #17C964;
-  --state-warning: #F5A524;
-  --state-error: #F31260;
-
-  --border-subtle: #27282F;
-  --border-default: #2E313A;
-  --border-emphasized: #3F4252;
-  --border-interactive: #0072F5;
-  --border-focus: #338EF7;
-  */
-
-  /* Neo Tokyo Theme colors */
-  --surface-base: #0D1117;
+  /* Base Theme colors - using Oklab for perceptual uniformity */
+  --surface-base: oklab(7% 0 0);
   /* Deep night */
-  --surface-raised: #161B22;
+  --surface-raised: oklab(11% 0 -0.01);
   /* Midnight building */
-  --surface-overlay: #21262D;
+  --surface-overlay: oklab(15% 0 -0.02);
   /* Neon-lit facade */
 
-  /* Typography */
-  --text-default: #F0F6FC;
+  /* Surface colors with opacity */
+  --surface-base-90: color-mix(in srgb, var(--surface-base) 90%, transparent);
+  --surface-base-75: color-mix(in srgb, var(--surface-base) 75%, transparent);
+  --surface-base-50: color-mix(in srgb, var(--surface-base) 50%, transparent);
+  --surface-base-25: color-mix(in srgb, var(--surface-base) 25%, transparent);
+
+  /* Light overlays for contrast */
+  --surface-light-90: color-mix(in srgb-linear, white 90%, transparent);
+  --surface-light-75: color-mix(in srgb-linear, white 75%, transparent);
+  --surface-light-50: color-mix(in srgb-linear, white 50%, transparent);
+  --surface-light-25: color-mix(in srgb-linear, white 25%, transparent);
+
+  /* Dark overlays for images */
+  --surface-dark-90: color-mix(in srgb-linear, black 90%, transparent);
+  --surface-dark-75: color-mix(in srgb-linear, black 75%, transparent);
+  --surface-dark-50: color-mix(in srgb-linear, black 50%, transparent);
+  --surface-dark-25: color-mix(in srgb-linear, black 25%, transparent);
+
+  /* Typography - using Oklab for perceptual uniformity */
+  --text-default: oklab(97% 0 0);
   /* Neon white */
-  --text-subdued: #C297FF;
+  --text-subdued: oklab(70% 0.06 -0.15);
   /* Soft purple glow */
-  --text-disabled: #7E4FBF;
+  --text-disabled: oklab(45% 0.08 -0.18);
   /* Dimmed purple */
 
-  /* Interactive elements */
-  --interactive-primary: #FF2E6D;
-  /* Neon pink */
-  --interactive-secondary: #A855F7;
-  /* Electric purple */
-  --state-success: #00F6C3;
+  /* Interactive elements - using Oklch to maintain vibrancy */
+  --interactive-primary: oklch(60% 0.2 250);
+  /* Electric blue */
+  --interactive-secondary: oklch(55% 0.25 300);
+  /* Digital purple */
+  --state-success: oklch(70% 0.15 160);
   /* Cyber mint */
-  --state-warning: #FFB800;
+  --state-warning: oklch(75% 0.18 80);
   /* Amber lantern */
-  --state-error: #FF3358;
+  --state-error: oklch(65% 0.25 0);
   /* Hot pink alert */
 
-  /* Border colors */
-  --border-subtle: #262B32;
+  /* Border colors - using Oklch for consistent chroma */
+  --border-subtle: oklch(20% 0 0);
   /* Dark building outline */
-  --border-default: #3F4752;
+  --border-default: oklch(30% 0 0);
   /* Neon frame */
-  --border-emphasized: #C297FF;
+  --border-emphasized: oklch(40% 0.1 300);
   /* Purple highlight */
-  --border-interactive: #FF2E6D;
-  /* Neon pink glow */
-  --border-focus: #FF71A4;
-  /* Soft pink focus */
+  --border-interactive: oklch(60% 0.2 250);
+  /* Neon blue glow */
+  --border-focus: oklch(65% 0.2 250);
+  /* Soft blue focus */
 
-  /* Interactive gradients */
-  --interactive-gradient-primary: linear-gradient(135deg, #FF2E6D, #FF71A4);
-  /* Neon pink flow */
-  --interactive-gradient-secondary: linear-gradient(135deg, #A855F7, #C297FF);
-  /* Electric purple surge */
-  --interactive-gradient-success: linear-gradient(135deg, #00F6C3, #00B894);
-  /* Cyber mint pulse */
+  /* Interactive gradients - using Oklab for perceptually uniform transitions */
+  --interactive-gradient-primary: linear-gradient(135deg,
+      oklab(60% 0.1 0.15),
+      oklab(65% 0.12 0.18));
+  --interactive-gradient-secondary: linear-gradient(135deg,
+      oklab(55% 0.15 -0.15),
+      oklab(60% 0.18 -0.18));
+  --interactive-gradient-success: linear-gradient(135deg,
+      oklab(70% -0.1 0.1),
+      oklab(75% -0.12 0.12));
 
   /* Elevation - with colored shadows */
-  --elevation-low: 0 2px 4px rgba(255, 46, 109, 0.1);
-  --elevation-medium: 0 4px 8px rgba(194, 151, 255, 0.15);
-  --elevation-high: 0 8px 16px rgba(194, 151, 255, 0.2);
-  --focus-ring: 0 0 0 3px rgba(255, 46, 109, 0.4);
+  --elevation-low: 0 2px 4px color-mix(in srgb-linear, black 20%, transparent);
+  --elevation-medium: 0 4px 8px color-mix(in srgb-linear, black 30%, transparent);
+  --elevation-high: 0 8px 16px color-mix(in srgb-linear, black 40%, transparent);
+  --focus-ring: 0 0 0 3px color-mix(in srgb-linear, var(--interactive-primary) 40%, transparent);
 
   color-scheme: light dark;
   font-synthesis: none;
@@ -97,6 +96,26 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--surface-base);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1.15rem;
 }
 
 @media (prefers-color-scheme: light) {
