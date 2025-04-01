@@ -3,18 +3,15 @@ import "./DraggableCard.css";
 import { useState } from "react";
 
 interface DraggableCardProps extends CardProps {
-  draggable: true;
+  draggable?: boolean;
 }
 
 const DraggableCard = (props: DraggableCardProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const [isDropTarget, setIsDropTarget] = useState(false);
-  const { drop } = props;
   const { id } = props;
 
-  const handleDrag = (event: React.DragEvent) => {};
   const handleDragEnd = (event: React.DragEvent) => {
-    console.log("draggable card handleDragEnd");
     setIsDragging(false);
     setIsDropTarget(false);
   };
@@ -23,28 +20,24 @@ const DraggableCard = (props: DraggableCardProps) => {
     event.dataTransfer.dropEffect = "move";
   };
   const handleDragEnter = (event: React.DragEvent) => {
-    console.log("draggable card handleDragEnter");
     setIsDropTarget(true);
   };
   const handleDragLeave = (event: React.DragEvent) => {
     if (!event.currentTarget.contains(event.relatedTarget as Node)) {
-      console.log("draggable card handleDragLeave");
       setIsDropTarget(false);
     }
   };
 
   // Handle the item to be dragged
   const handleDragStart = (event: React.DragEvent) => {
-    console.log("draggable card handleDragStart");
-    event.dataTransfer.setData("text/plain", id.toString());
+    console.log("-------dragging------>", event);
+    event.dataTransfer.setData("dragging", id);
     event.dataTransfer.effectAllowed = "move";
     setIsDragging(true);
   };
   const handleDrop = (event: React.DragEvent) => {
     setIsDropTarget(false);
-    if (drop) {
-      drop(event);
-    }
+    console.log()
   };
 
   return (
@@ -53,7 +46,6 @@ const DraggableCard = (props: DraggableCardProps) => {
       draggable={true}
       isDragging={isDragging}
       isDropTarget={isDropTarget}
-      drag={handleDrag}
       dragEnd={handleDragEnd}
       dragOver={handleDragOver}
       dragEnter={handleDragEnter}

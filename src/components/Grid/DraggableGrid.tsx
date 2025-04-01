@@ -2,73 +2,56 @@ import { useState } from "react";
 import Grid, { type GridProps } from "./Grid";
 import "./DraggableGrid.css";
 import DraggableCard, { type DraggableCardProps } from "../Card/DraggableCard";
+import { delay } from "../../utils/utils";
 
 interface DraggableGridProps extends Omit<GridProps, "children"> {
   data: DraggableCardProps[];
 }
 
 const DraggableGrid = ({ data, auto = false }: DraggableGridProps) => {
-  const [dragging, setDragging] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isDroppingId, setIsDroppingId] = useState<string | null>(null);
   const [gridData, setGridData] = useState(data);
 
   const handleDragStart = (event: React.DragEvent) => {
-    console.log("handleDragStart", event);
-
-    setDragging(true);
+    setIsDragging(true);
   };
 
   const handleDragEnd = (event: React.DragEvent) => {
-    console.log("--->>>>handleDragEnd", event);
-    setDragging(false);
+    setIsDragging(false);
   };
 
-  // Allows drop
-  const handleDragOver = (event: React.DragEvent) => {
-    event.preventDefault();
-  };
+  const handleDrop = async (event: React.DragEvent) => {
+    const draggedTargetId = event.dataTransfer.getData("dragging");
+    const dropTarget = (event.target as HTMLElement).closest<HTMLElement>(
+      ".card"
+    );
+    const dropTargetId = dropTarget?.dataset.id;
 
-  const handleDragEnter = (event: React.DragEvent) => {
-    console.log("---> handleDragEnter", event.target);
-  };
+    if (dropTargetId === draggedTargetId) return;
 
-  const handleDragLeave = (event: React.DragEvent) => {
-    console.log("<--- handleDragLeave", event.target);
-  };
-
-  const handleDrop = (
-    event: React.DragEvent,
-    dropTarget: DraggableCardProps
-  ) => {
-    console.log("<---> handleDrop", event.target);
-    console.log("<---> handleDrop", dropTarget);
-    const draggedTargetId = event.dataTransfer.getData("text/plain");
     const dropTargetIndex = gridData.findIndex(
-      (gridItem) => gridItem.id === dropTarget.id
+      (gridItem) => gridItem.id === dropTargetId
     );
 
-    console.log("draggedTargetId", draggedTargetId);
-    console.log("dropTargetIndex", dropTargetIndex);
-
-    if (draggedTargetId) {
+    if (draggedTargetId && dropTargetId) {
       const draggedTargetData = gridData.find(
         (gridItem) => gridItem.id === draggedTargetId
       );
 
-      const newGridData = gridData.filter((gridItem) => {
-        console.log(
-          "gridItem.id",
-          gridItem.id,
-          draggedTargetId,
-          gridItem.id !== draggedTargetId
-        );
-        return gridItem.id !== draggedTargetId;
-      });
+      const newGridData = gridData.filter(
+        (gridItem) => gridItem.id !== draggedTargetId
+      );
 
-      console.log("newGridData", newGridData);
-      console.log("draggedTargetData", draggedTargetData);
       if (draggedTargetData) {
         newGridData.splice(dropTargetIndex, 0, draggedTargetData);
+
+        await delay(100);
         setGridData(newGridData);
+        await delay(100);
+        setIsDroppingId(draggedTargetId);
+        await delay(1000);
+        setIsDroppingId(null);
       }
     }
   };
@@ -76,12 +59,10 @@ const DraggableGrid = ({ data, auto = false }: DraggableGridProps) => {
   return (
     <Grid
       auto={auto}
-      dragging={dragging}
+      dragging={isDragging}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      onDragOver={handleDragOver}
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
     >
       {gridData.map((card) => (
         <DraggableCard
@@ -89,10 +70,7 @@ const DraggableGrid = ({ data, auto = false }: DraggableGridProps) => {
           id={card.id}
           title={`${card.title} ${card.id}`}
           description={`${card.description}`}
-          draggable
-          dragStart={handleDragStart}
-          dragEnd={handleDragEnd}
-          drop={(event) => handleDrop(event, card)}
+          isDropping={isDroppingId === card.id}
         />
       ))}
     </Grid>

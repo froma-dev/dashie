@@ -1,5 +1,6 @@
 import Button from "../Button/Button";
 import "./Card.css";
+import { classNamesBuilder } from "../../utils/utils";
 
 interface CardProps {
   id: string;
@@ -7,8 +8,8 @@ interface CardProps {
   description: string;
   draggable?: boolean;
   isDragging?: boolean;
+  isDropping?: boolean;
   isDropTarget?: boolean;
-  drag?: (event: React.DragEvent) => void;
   dragEnd?: (event: React.DragEvent) => void;
   dragOver?: (event: React.DragEvent) => void;
   dragEnter?: (event: React.DragEvent) => void;
@@ -21,7 +22,6 @@ const Card = ({
   title,
   description,
   draggable = false,
-  drag,
   dragEnd,
   dragOver,
   dragEnter,
@@ -30,22 +30,26 @@ const Card = ({
   drop,
   isDragging = false,
   isDropTarget = false,
+  isDropping = false,
+  id,
 }: CardProps) => {
-  const cardClassName = `card ${isDragging ? "dragging " : ""} ${
-    isDropTarget ? "drop-target " : ""
-  }`;
-
+  const cardClassName = classNamesBuilder(
+    "card",
+    { dragging: isDragging },
+    { "drop-target": isDropTarget },
+    { dropping: isDropping }
+  );
   return (
     <article
       className={cardClassName}
       draggable={draggable}
-      onDrag={drag}
       onDragEnd={dragEnd}
       onDragOver={dragOver}
       onDragEnter={dragEnter}
       onDragLeave={dragLeave}
       onDragStart={dragStart}
       onDrop={drop}
+      data-id={id}
     >
       <h2 className="card__title">{title}</h2>
       <p className="card__description">{description}</p>
