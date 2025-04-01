@@ -37,7 +37,8 @@ const Card = ({
     "card",
     { dragging: isDragging },
     { "drop-target": isDropTarget },
-    { dropping: isDropping }
+    { dropping: isDropping },
+    { draggable: draggable }
   );
   return (
     <article
