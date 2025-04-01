@@ -7,6 +7,7 @@ interface CardProps {
   description: string;
   draggable?: boolean;
   isDragging?: boolean;
+  isDropTarget?: boolean;
   drag?: (event: React.DragEvent) => void;
   dragEnd?: (event: React.DragEvent) => void;
   dragOver?: (event: React.DragEvent) => void;
@@ -28,9 +29,12 @@ const Card = ({
   dragStart,
   drop,
   isDragging = false,
+  isDropTarget = false,
 }: CardProps) => {
-  const cardClassName = `card ${isDragging ? "dragging" : ""}`;
-  
+  const cardClassName = `card ${isDragging ? "dragging " : ""} ${
+    isDropTarget ? "drop-target " : ""
+  }`;
+
   return (
     <article
       className={cardClassName}

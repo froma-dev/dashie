@@ -12,14 +12,6 @@
 
     &:hover {
         border-color: var(--border-default);
-
-        &.dragging {
-            border-color: var(--border-interactive);
-        }
-    }
-
-    &.dragging {
-        border: 1px dashed var(--border-interactive);
     }
 
     .card__title {

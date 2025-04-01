@@ -26,7 +26,7 @@ function App() {
         description="Hero description paragraph"
         image="/hero-bg.webp"
       />
-      <Card id={1} title="Card title" description="Card description" />
+      <Card id={"card-9"} title="Card title" description="Card description" />
       <Link href="https://github.com/">Link</Link>
       <DraggableGrid data={cards} auto />
     </>

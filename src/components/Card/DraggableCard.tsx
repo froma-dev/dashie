@@ -1,4 +1,5 @@
 import Card, { type CardProps } from "./Card";
+import "./DraggableCard.css";
 import { useState } from "react";
 
 interface DraggableCardProps extends CardProps {
@@ -7,32 +8,40 @@ interface DraggableCardProps extends CardProps {
 
 const DraggableCard = (props: DraggableCardProps) => {
   const [isDragging, setIsDragging] = useState(false);
-  const { dragEnd, drop } = props;
+  const [isDropTarget, setIsDropTarget] = useState(false);
+  const { drop } = props;
   const { id } = props;
 
   const handleDrag = (event: React.DragEvent) => {};
   const handleDragEnd = (event: React.DragEvent) => {
     console.log("draggable card handleDragEnd");
     setIsDragging(false);
+    setIsDropTarget(false);
   };
-  const handleDragOver = (event: React.DragEvent) => {};
+  const handleDragOver = (event: React.DragEvent) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+  };
   const handleDragEnter = (event: React.DragEvent) => {
     console.log("draggable card handleDragEnter");
-    setIsDragging(true);
+    setIsDropTarget(true);
   };
   const handleDragLeave = (event: React.DragEvent) => {
-    console.log("draggable card handleDragLeave");
     if (!event.currentTarget.contains(event.relatedTarget as Node)) {
-      setIsDragging(false);
+      console.log("draggable card handleDragLeave");
+      setIsDropTarget(false);
     }
   };
+
+  // Handle the item to be dragged
   const handleDragStart = (event: React.DragEvent) => {
     console.log("draggable card handleDragStart");
     event.dataTransfer.setData("text/plain", id.toString());
+    event.dataTransfer.effectAllowed = "move";
     setIsDragging(true);
   };
   const handleDrop = (event: React.DragEvent) => {
-    setIsDragging(false);
+    setIsDropTarget(false);
     if (drop) {
       drop(event);
     }
@@ -43,6 +52,7 @@ const DraggableCard = (props: DraggableCardProps) => {
       {...props}
       draggable={true}
       isDragging={isDragging}
+      isDropTarget={isDropTarget}
       drag={handleDrag}
       dragEnd={handleDragEnd}
       dragOver={handleDragOver}

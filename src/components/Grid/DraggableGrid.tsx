@@ -78,6 +78,7 @@ const DraggableGrid = ({ data, auto = false }: DraggableGridProps) => {
       auto={auto}
       dragging={dragging}
       onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}

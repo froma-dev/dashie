@@ -1,7 +1,9 @@
 .grid {
-    border: 2px solid var(--border-subtle);
-
     &.dragging {
-        /* border: 2px dashed var(--border-emphasized); */
+        cursor: grabbing;
+
+        *:not(.dragging, .drop-target) {
+            opacity: 0.5;
+        }
     }
 }
