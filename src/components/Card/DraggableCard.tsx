@@ -30,14 +30,12 @@ const DraggableCard = (props: DraggableCardProps) => {
 
   // Handle the item to be dragged
   const handleDragStart = (event: React.DragEvent) => {
-    console.log("-------dragging------>", event);
     event.dataTransfer.setData("dragging", id);
     event.dataTransfer.effectAllowed = "move";
     setIsDragging(true);
   };
   const handleDrop = (event: React.DragEvent) => {
     setIsDropTarget(false);
-    console.log()
   };
 
   return (
