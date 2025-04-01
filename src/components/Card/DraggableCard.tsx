@@ -1,28 +1,48 @@
 import Card, { type CardProps } from "./Card";
+import { useState } from "react";
 
 interface DraggableCardProps extends CardProps {
-  drag: (event: React.DragEvent) => void;
-  dragEnd: (event: React.DragEvent) => void;
-  dragOver: (event: React.DragEvent) => void;
-  dragEnter: (event: React.DragEvent) => void;
-  dragLeave: (event: React.DragEvent) => void;
-  dragStart: (event: React.DragEvent) => void;
-  drop: (event: React.DragEvent) => void;
+  draggable: true;
 }
 
 const DraggableCard = (props: DraggableCardProps) => {
+  const [isDragging, setIsDragging] = useState(false);
+  const { dragEnd, drop } = props;
+  const { id } = props;
+
   const handleDrag = (event: React.DragEvent) => {};
-  const handleDragEnd = (event: React.DragEvent) => {};
+  const handleDragEnd = (event: React.DragEvent) => {
+    console.log("draggable card handleDragEnd");
+    setIsDragging(false);
+  };
   const handleDragOver = (event: React.DragEvent) => {};
-  const handleDragEnter = (event: React.DragEvent) => {};
-  const handleDragLeave = (event: React.DragEvent) => {};
-  const handleDragStart = (event: React.DragEvent) => {};
-  const handleDrop = (event: React.DragEvent) => {};
+  const handleDragEnter = (event: React.DragEvent) => {
+    console.log("draggable card handleDragEnter");
+    setIsDragging(true);
+  };
+  const handleDragLeave = (event: React.DragEvent) => {
+    console.log("draggable card handleDragLeave");
+    if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+      setIsDragging(false);
+    }
+  };
+  const handleDragStart = (event: React.DragEvent) => {
+    console.log("draggable card handleDragStart");
+    event.dataTransfer.setData("text/plain", id.toString());
+    setIsDragging(true);
+  };
+  const handleDrop = (event: React.DragEvent) => {
+    setIsDragging(false);
+    if (drop) {
+      drop(event);
+    }
+  };
 
   return (
     <Card
       {...props}
       draggable={true}
+      isDragging={isDragging}
       drag={handleDrag}
       dragEnd={handleDragEnd}
       dragOver={handleDragOver}
@@ -35,3 +55,4 @@ const DraggableCard = (props: DraggableCardProps) => {
 };
 
 export default DraggableCard;
+export type { DraggableCardProps };

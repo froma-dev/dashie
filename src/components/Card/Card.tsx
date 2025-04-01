@@ -2,9 +2,11 @@ import Button from "../Button/Button";
 import "./Card.css";
 
 interface CardProps {
+  id: string;
   title: string;
   description: string;
   draggable?: boolean;
+  isDragging?: boolean;
   drag?: (event: React.DragEvent) => void;
   dragEnd?: (event: React.DragEvent) => void;
   dragOver?: (event: React.DragEvent) => void;
@@ -25,10 +27,13 @@ const Card = ({
   dragLeave,
   dragStart,
   drop,
+  isDragging = false,
 }: CardProps) => {
+  const cardClassName = `card ${isDragging ? "dragging" : ""}`;
+  
   return (
     <article
-      className="card"
+      className={cardClassName}
       draggable={draggable}
       onDrag={drag}
       onDragEnd={dragEnd}
