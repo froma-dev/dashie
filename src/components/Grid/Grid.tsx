@@ -1,4 +1,5 @@
 import "./Grid.css";
+import { classNamesBuilder } from "../../utils/utils";
 
 interface GridProps {
   children: React.ReactNode;
@@ -23,9 +24,10 @@ const Grid = ({
   onDragLeave,
   dragging = false,
 }: GridProps) => {
-  const gridClassName = `grid ${auto ? "auto" : ""} ${
-    dragging ? "dragging" : ""
-  }`;
+  const gridClassName = classNamesBuilder("grid", {
+    auto,
+    dragging,
+  });
 
   return (
     <section
