@@ -1,4 +1,6 @@
 .hero.carousel {
+    position: relative;
+
     .hero__nav {
         display: flex;
         justify-content: space-between;
@@ -6,9 +8,10 @@
         grid-row: 1;
         grid-column: 1;
         height: 4rem;
-        position: absolute;
+        z-index: 1;
         bottom: 0;
-        padding: 0 4rem;
+        padding-left: 4rem;
+        position: absolute;
 
         .hero__nav__button {
             border-radius: 50%;
@@ -17,13 +20,12 @@
             padding: 0.5rem;
             box-shadow: var(--elevation-medium);
             border: 1px solid transparent;
-            z-index: 1;
         }
     }
 
     .hero__content {
         opacity: 0;
-        transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: opacity 0.5s ease-in-out;
 
         &.active {
             opacity: 1;

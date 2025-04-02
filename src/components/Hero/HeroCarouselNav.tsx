@@ -3,21 +3,15 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 type Direction = "previous" | "next";
 interface HeroNavCarouselProps {
-  handleNavClick: (dir: Direction) => void;
+  onClick: (dir: Direction) => void;
 }
-const HeroCarouselNav = ({ handleNavClick }: HeroNavCarouselProps) => {
+const HeroCarouselNav = ({ onClick }: HeroNavCarouselProps) => {
   return (
     <nav className="hero__nav">
-      <Button
-        className="hero__nav__button"
-        onClick={() => handleNavClick("previous")}
-      >
+      <Button className="hero__nav__button" onClick={() => onClick("previous")}>
         <IconChevronLeft size={48} />
       </Button>
-      <Button
-        className="hero__nav__button"
-        onClick={() => handleNavClick("next")}
-      >
+      <Button className="hero__nav__button" onClick={() => onClick("next")}>
         <IconChevronRight size={48} />
       </Button>
     </nav>

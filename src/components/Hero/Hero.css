@@ -12,11 +12,12 @@
         grid-column: 1;
 
         .hero__image {
-            object-fit: contain;
+            object-fit: cover;
             width: 100%;
             height: 100%;
             grid-row: 1;
             grid-column: 1;
+            aspect-ratio: 287/191;
         }
 
         .hero__items {

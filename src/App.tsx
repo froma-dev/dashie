@@ -20,7 +20,7 @@ const cards = [
 const heros = [
   {
     id: "hero-1",
-    title: "Hero",
+    title: "Hero 1",
     description: "Hero description paragraph",
     image: "/hero-bg.webp",
   },
@@ -42,6 +42,7 @@ function App() {
   return (
     <>
       <Header />
+      <progress value={0.5} />
       <HeroCarousel data={heros} />
       <Card id={"card-9"} title="Card title" description="Card description" />
       <Link href="https://github.com/">Link</Link>
