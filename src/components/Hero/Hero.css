@@ -6,7 +6,7 @@
         display: grid;
         grid-template-columns: 1fr 0fr;
         width: 100%;
-        border-radius: 8px;
+        border-radius: 0.5rem;
         overflow: hidden;
         grid-row: 1;
         grid-column: 1;
