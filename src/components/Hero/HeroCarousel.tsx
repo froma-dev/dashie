@@ -2,13 +2,9 @@ import Hero, { type HeroProps } from "./Hero";
 import "./HeroCarousel.css";
 import { useState } from "react";
 import HeroCarouselNav from "./HeroCarouselNav";
-import { classNamesBuilder, delay } from "../../utils/utils";
+import { classNamesBuilder } from "../../utils/utils";
 
-interface HeroCarouselProps
-  extends Omit<
-    HeroProps,
-    "image" | "title" | "description" | "isCarousel" | "children"
-  > {
+interface HeroCarouselProps extends HeroProps {
   data: HeroProps[];
 }
 
@@ -62,3 +58,4 @@ const HeroCarousel = (props: HeroCarouselProps) => {
 };
 
 export default HeroCarousel;
+export { type HeroCarouselProps, type HeroProps };

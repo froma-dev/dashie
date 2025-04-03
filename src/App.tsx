@@ -4,7 +4,7 @@ import Link from "./components/Link/Link";
 import DraggableGrid from "./components/Grid/DraggableGrid";
 import { type DraggableCardProps } from "./components/Card/DraggableCard";
 import Header from "./components/Header/Header";
-import HeroCarousel, { HeroProps } from "./components/Hero/HeroCarousel";
+import HeroCarousel, { type HeroProps } from "./components/Hero/HeroCarousel";
 
 const cards = [
   { id: "card-1", title: "Card", description: "Card description" },
