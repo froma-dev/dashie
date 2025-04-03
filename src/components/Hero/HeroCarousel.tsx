@@ -3,7 +3,6 @@ import "./HeroCarousel.css";
 import { useState } from "react";
 import HeroCarouselNav from "./HeroCarouselNav";
 import { classNamesBuilder } from "../../utils/utils";
-import ProgressCountdown from "../Progress/ProgressCountdown";
 
 interface HeroCarouselProps extends HeroProps {
   data: HeroProps[];
@@ -61,6 +60,8 @@ const HeroCarousel = (props: HeroCarouselProps) => {
         onKeyDown={handleNavigation}
         length={dataLength}
         current={current}
+        autoPlayIntervalMs={1000}
+        autoPlayMaxSteps={5}
       />
     </Hero>
   );

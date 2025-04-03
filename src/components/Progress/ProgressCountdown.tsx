@@ -1,11 +1,34 @@
 import "./ProgressCountdown.css";
+import { useState, useEffect } from "react";
 
 interface ProgressCountdownProps {
   length: number;
   activeIndex: number;
+  autoPlayIntervalMs: number;
+  autoPlayMaxSteps: number;
 }
 
-const ProgressCountdown = ({ length, activeIndex }: ProgressCountdownProps) => {
+const ProgressCountdown = ({
+  length,
+  activeIndex,
+  autoPlayIntervalMs,
+  autoPlayMaxSteps,
+}: ProgressCountdownProps) => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev === autoPlayMaxSteps) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev + 1;
+      });
+    }, autoPlayIntervalMs);
+    return () => clearInterval(interval);
+  }, [length, autoPlayIntervalMs, autoPlayMaxSteps]);
+
   return (
     <div className="progress-countdown">
       {Array.from({ length }).map((_, index) => (
@@ -14,7 +37,8 @@ const ProgressCountdown = ({ length, activeIndex }: ProgressCountdownProps) => {
             index === activeIndex ? "active" : ""
           }`}
           key={index}
-          value={0}
+          value={progress}
+          max={autoPlayMaxSteps}
         ></progress>
       ))}
     </div>
@@ -22,3 +46,4 @@ const ProgressCountdown = ({ length, activeIndex }: ProgressCountdownProps) => {
 };
 
 export default ProgressCountdown;
+export { type ProgressCountdownProps };

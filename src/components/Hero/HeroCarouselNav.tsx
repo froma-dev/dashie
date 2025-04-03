@@ -8,6 +8,8 @@ interface HeroNavCarouselProps {
   onKeyDown: (dir: Direction) => void;
   length: number;
   current: number;
+  autoPlayIntervalMs: number;
+  autoPlayMaxSteps: number;
 }
 const NEXT: Direction = "next";
 const PREVIOUS: Direction = "previous";
@@ -16,6 +18,8 @@ const HeroCarouselNav = ({
   onKeyDown,
   length,
   current,
+  autoPlayIntervalMs,
+  autoPlayMaxSteps,
 }: HeroNavCarouselProps) => {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.code === "ArrowLeft") {
@@ -35,7 +39,12 @@ const HeroCarouselNav = ({
         >
           <IconChevronLeft size={48} />
         </Button>
-        <ProgressCountdown length={length} activeIndex={current} />
+        <ProgressCountdown
+          length={length}
+          activeIndex={current}
+          autoPlayIntervalMs={autoPlayIntervalMs}
+          autoPlayMaxSteps={autoPlayMaxSteps}
+        />
         <Button
           className="hero__nav__button"
           onKeyDown={handleKeyDown}
