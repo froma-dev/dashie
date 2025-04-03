@@ -1,4 +1,9 @@
 .carousel__item {
     border-radius: 0.5rem;
     overflow: hidden;
+
+    img {
+        object-fit: cover;
+        aspect-ratio: 640/480;
+    }
 }

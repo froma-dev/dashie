@@ -119,11 +119,7 @@ function App() {
   return (
     <>
       <Header />
-      <Carousel data={carouselItems} title="Carousel">
-        {carouselItems.map((carouselItem) => (
-          <CarouselItem key={carouselItem.id} {...carouselItem} />
-        ))}
-      </Carousel>
+      <Carousel data={carouselItems} title="Carousel" />
       <HeroCarousel data={heros} />
       <Card id={"card-9"} title="Card title" description="Card description" />
       <Link href="https://github.com/">Link</Link>

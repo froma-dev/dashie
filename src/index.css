@@ -78,6 +78,9 @@
   --nav-bullet-border-color: var(--border-emphasized);
   --nav-bullet-value-background: var(--interactive-primary);
 
+  /* Transition / Animations */
+  --smooth-transition-function: cubic-bezier(0.4, 0.0, 0.2, 1)
+
 
   color-scheme: light dark;
   font-synthesis: none;
