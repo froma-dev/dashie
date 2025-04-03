@@ -58,6 +58,7 @@ const HeroCarousel = (props: HeroCarouselProps) => {
       <HeroCarouselNav
         onClick={handleNavigation}
         onKeyDown={handleNavigation}
+        onAutoPlay={() => handleNavigation("next")}
         length={dataLength}
         current={current}
         autoPlayIntervalMs={1000}

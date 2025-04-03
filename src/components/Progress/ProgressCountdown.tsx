@@ -6,6 +6,7 @@ interface ProgressCountdownProps {
   activeIndex: number;
   autoPlayIntervalMs: number;
   autoPlayMaxSteps: number;
+  onAutoPlay: () => void;
 }
 
 const ProgressCountdown = ({
@@ -13,6 +14,7 @@ const ProgressCountdown = ({
   activeIndex,
   autoPlayIntervalMs,
   autoPlayMaxSteps,
+  onAutoPlay,
 }: ProgressCountdownProps) => {
   const [progress, setProgress] = useState(0);
 
@@ -21,13 +23,14 @@ const ProgressCountdown = ({
       setProgress((prev) => {
         if (prev === autoPlayMaxSteps) {
           clearInterval(interval);
+          onAutoPlay();
           return 0;
         }
         return prev + 1;
       });
     }, autoPlayIntervalMs);
     return () => clearInterval(interval);
-  }, [length, autoPlayIntervalMs, autoPlayMaxSteps]);
+  }, [autoPlayIntervalMs, autoPlayMaxSteps, onAutoPlay]);
 
   return (
     <div className="progress-countdown">
@@ -37,7 +40,7 @@ const ProgressCountdown = ({
             index === activeIndex ? "active" : ""
           }`}
           key={index}
-          value={progress}
+          value={index === activeIndex ? progress : 0}
           max={autoPlayMaxSteps}
         ></progress>
       ))}

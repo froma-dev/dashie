@@ -9,6 +9,7 @@ interface HeroNavCarouselProps {
   length: number;
   current: number;
   autoPlayIntervalMs: number;
+  onAutoPlay: () => void;
   autoPlayMaxSteps: number;
 }
 const NEXT: Direction = "next";
@@ -20,6 +21,7 @@ const HeroCarouselNav = ({
   current,
   autoPlayIntervalMs,
   autoPlayMaxSteps,
+  onAutoPlay,
 }: HeroNavCarouselProps) => {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.code === "ArrowLeft") {
@@ -44,6 +46,7 @@ const HeroCarouselNav = ({
           activeIndex={current}
           autoPlayIntervalMs={autoPlayIntervalMs}
           autoPlayMaxSteps={autoPlayMaxSteps}
+          onAutoPlay={onAutoPlay}
         />
         <Button
           className="hero__nav__button"
