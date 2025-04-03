@@ -1,0 +1,16 @@
+.carousel {
+    display: grid;
+    width: 100%;
+    overflow: hidden;
+    gap: 1rem;
+
+    .carousel__title {
+        text-align: left;
+    }
+
+    .carousel__content {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+}
