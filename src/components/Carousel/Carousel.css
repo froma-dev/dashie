@@ -4,8 +4,15 @@
     overflow: hidden;
     gap: 1rem;
 
-    .carousel__title {
-        text-align: left;
+    .carousel__header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .carousel__title {
+            display: inline-block;
+            text-align: left;
+        }
     }
 
     .carousel__content {

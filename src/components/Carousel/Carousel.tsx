@@ -2,6 +2,7 @@ import { classNamesBuilder } from "../../utils/utils";
 import CarouselItem, { type CarouselItemProps } from "./CarouselItem";
 import "./Carousel.css";
 import { useEffect, useRef, useState } from "react";
+import BasicNavigator, { Direction } from "../Navigator/BasicNavigator";
 
 interface CarouselProps {
   data: CarouselItemProps[];
@@ -9,7 +10,7 @@ interface CarouselProps {
   className?: string;
   children: React.ReactNode;
 }
-
+const ITEM_GAP_PX = 16;
 const Carousel = ({ className = "", data, title }: CarouselProps) => {
   const classNames = classNamesBuilder("carousel", className);
   const refCarouselContent = useRef<HTMLDivElement>(null);
@@ -19,31 +20,37 @@ const Carousel = ({ className = "", data, title }: CarouselProps) => {
   });
   const [carouselStripPosition, setCarouselStripPosition] = useState(0);
 
-  const handleCarouselStripPosition = () => {
-    setCarouselStripPosition((prev) => {
-      const newValue = prev + carouselComputedValues.carouselItemWidth;
-      if (refCarouselContent.current)
-        refCarouselContent.current.style.transform = `translateX(-${newValue}px)`;
-      return newValue;
-    });
+  const handleCarouselStripPosition = (dir: Direction) => {
+    if (dir === "previous") {
+      setCarouselStripPosition((prev) => {
+        const newValue = prev - carouselComputedValues.carouselItemWidth;
+        if (newValue < 0) return 0;
+        return newValue;
+      });
+    } else if (dir === "next") {
+      setCarouselStripPosition((prev) => {
+        const newValue = prev + carouselComputedValues.carouselItemWidth;
+        if (newValue >= carouselComputedValues.carouselStripWidth) return prev;
+        return newValue;
+      });
+    }
   };
 
-  const handleCarouselStripPositionBack = () => {
-    setCarouselStripPosition((prev) => {
-      const newValue = prev - carouselComputedValues.carouselItemWidth;
-      if (refCarouselContent.current)
-        refCarouselContent.current.style.transform = `translateX(-${newValue}px)`;
-      return newValue;
-    });
-  };
-
+  // Resize Observer
   useEffect(() => {
     const observer = new ResizeObserver(([entry]) => {
-      setCarouselComputedValues((prev) => ({
-        ...prev,
-        carouselStripWidth: entry.contentRect.width,
-        carouselItemWidth: entry.contentRect.width / data.length,
-      }));
+      setCarouselComputedValues((prev) => {
+        const carouselItemWidth =
+          entry.target.firstElementChild?.getBoundingClientRect().width || 0;
+        const carouselItemWidthWithGap = carouselItemWidth + ITEM_GAP_PX;
+
+        console.log("cc--->", carouselItemWidth);
+        return {
+          ...prev,
+          carouselStripWidth: entry.contentRect.width,
+          carouselItemWidth: carouselItemWidthWithGap,
+        };
+      });
     });
 
     if (refCarouselContent.current)
@@ -52,11 +59,15 @@ const Carousel = ({ className = "", data, title }: CarouselProps) => {
     return () => observer.disconnect();
   }, [refCarouselContent, data]);
 
-  console.log(carouselComputedValues);
-
   return (
     <div className={classNames}>
-      {title && <h2 className="carousel__title">{title}</h2>}
+      <div className="carousel__header">
+        {title && <h2 className="carousel__title">{title}</h2>}
+        <BasicNavigator
+          onClick={handleCarouselStripPosition}
+          onKeyDown={handleCarouselStripPosition}
+        />
+      </div>
       <div
         className="carousel__content"
         ref={refCarouselContent}
@@ -66,8 +77,6 @@ const Carousel = ({ className = "", data, title }: CarouselProps) => {
           <CarouselItem key={carouselItem.id} {...carouselItem} />
         ))}
       </div>
-      <button onClick={handleCarouselStripPosition}>Next</button>
-      <button onClick={handleCarouselStripPositionBack}>Previous</button>
     </div>
   );
 };
