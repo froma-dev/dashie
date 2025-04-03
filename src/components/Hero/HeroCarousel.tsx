@@ -11,7 +11,8 @@ interface HeroCarouselProps extends HeroProps {
 const HeroCarousel = (props: HeroCarouselProps) => {
   const dataLength = props.data.length;
   const [current, setCurrent] = useState(0);
-  const handleNavClick = async (dir: string) => {
+
+  const handleNavigation = async (dir: string) => {
     if (dir === "previous") {
       setCurrent((prev) => (prev === 0 ? dataLength - 1 : prev - 1));
     } else if (dir === "next") {
@@ -52,7 +53,10 @@ const HeroCarousel = (props: HeroCarouselProps) => {
           </div>
         </div>
       ))}
-      <HeroCarouselNav onClick={handleNavClick} />
+      <HeroCarouselNav
+        onClick={handleNavigation}
+        onKeyDown={handleNavigation}
+      />
     </Hero>
   );
 };
