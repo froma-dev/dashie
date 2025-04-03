@@ -3,6 +3,7 @@ import "./HeroCarousel.css";
 import { useState } from "react";
 import HeroCarouselNav from "./HeroCarouselNav";
 import { classNamesBuilder } from "../../utils/utils";
+import ProgressCountdown from "../Progress/ProgressCountdown";
 
 interface HeroCarouselProps extends HeroProps {
   data: HeroProps[];
@@ -37,25 +38,29 @@ const HeroCarousel = (props: HeroCarouselProps) => {
 
   return (
     <Hero isCarousel {...props} className="carousel">
-      {heroes.map((hero) => (
-        <div
-          className={classNamesBuilder("hero__content", getHeroClass(hero))}
-          key={hero.id}
-        >
-          <img className="hero__image" src={hero.image} alt={hero.title} />
-          <div className="hero__items items-start">
-            <section className="hero__items__metadata">
-              <h1>{hero.title}</h1>
-              {hero.description ? (
-                <p className="description">{hero.description}</p>
-              ) : null}
-            </section>
+      <div className="hero-container">
+        {heroes.map((hero) => (
+          <div
+            className={classNamesBuilder("hero__content", getHeroClass(hero))}
+            key={hero.id}
+          >
+            <img className="hero__image" src={hero.image} alt={hero.title} />
+            <div className="hero__items items-start">
+              <section className="hero__items__metadata">
+                <h1>{hero.title}</h1>
+                {hero.description ? (
+                  <p className="description">{hero.description}</p>
+                ) : null}
+              </section>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <HeroCarouselNav
         onClick={handleNavigation}
         onKeyDown={handleNavigation}
+        length={dataLength}
+        current={current}
       />
     </Hero>
   );

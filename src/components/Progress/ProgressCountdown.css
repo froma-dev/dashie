@@ -1,0 +1,32 @@
+.progress-countdown {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+
+    .progress-countdown__bullet {
+        width: 0.8rem;
+        height: 0.8rem;
+        overflow: hidden;
+
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: var(--nav-bullet-background);
+        border-radius: 1rem;
+        transition: transform 0.3s ease;
+
+        &.active {
+            transform: scale(1.4);
+        }
+
+        &::-webkit-progress-value {
+            background-color: var(--nav-bullet-value-background);
+            border-radius: 2rem;
+        }
+
+        &::-webkit-progress-bar {
+            background-color: inherit;
+            border-radius: 2rem;
+        }
+    }
+}

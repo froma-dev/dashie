@@ -74,6 +74,11 @@
   --elevation-high: 0 8px 16px color-mix(in srgb-linear, black 40%, transparent);
   --focus-ring: 0 0 0 3px color-mix(in srgb-linear, var(--interactive-primary) 40%, transparent);
 
+  --nav-bullet-background: var(--surface-light-75);
+  --nav-bullet-border-color: var(--border-emphasized);
+  --nav-bullet-value-background: var(--interactive-primary);
+
+
   color-scheme: light dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;

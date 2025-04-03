@@ -1,14 +1,22 @@
 import Button from "../Button/Button";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import ProgressCountdown from "../Progress/ProgressCountdown";
 
 type Direction = "previous" | "next";
 interface HeroNavCarouselProps {
   onClick: (dir: Direction) => void;
   onKeyDown: (dir: Direction) => void;
+  length: number;
+  current: number;
 }
 const NEXT: Direction = "next";
 const PREVIOUS: Direction = "previous";
-const HeroCarouselNav = ({ onClick, onKeyDown }: HeroNavCarouselProps) => {
+const HeroCarouselNav = ({
+  onClick,
+  onKeyDown,
+  length,
+  current,
+}: HeroNavCarouselProps) => {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.code === "ArrowLeft") {
       onKeyDown(PREVIOUS);
@@ -18,21 +26,24 @@ const HeroCarouselNav = ({ onClick, onKeyDown }: HeroNavCarouselProps) => {
   };
 
   return (
-    <nav className="hero__nav">
-      <Button
-        className="hero__nav__button"
-        onKeyDown={handleKeyDown}
-        onClick={() => onClick(PREVIOUS)}
-      >
-        <IconChevronLeft size={48} />
-      </Button>
-      <Button
-        className="hero__nav__button"
-        onKeyDown={handleKeyDown}
-        onClick={() => onClick(NEXT)}
-      >
-        <IconChevronRight size={48} />
-      </Button>
+    <nav className="hero__navigation">
+      <div className="hero__nav">
+        <Button
+          className="hero__nav__button"
+          onKeyDown={handleKeyDown}
+          onClick={() => onClick(PREVIOUS)}
+        >
+          <IconChevronLeft size={48} />
+        </Button>
+        <ProgressCountdown length={length} activeIndex={current} />
+        <Button
+          className="hero__nav__button"
+          onKeyDown={handleKeyDown}
+          onClick={() => onClick(NEXT)}
+        >
+          <IconChevronRight size={48} />
+        </Button>
+      </div>
     </nav>
   );
 };
