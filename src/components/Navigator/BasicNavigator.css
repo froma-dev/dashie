@@ -6,7 +6,6 @@
     .basic__nav {
         display: flex;
         align-items: center;
-        padding-left: 4rem;
         grid-row: 2;
         grid-column: 1;
 
