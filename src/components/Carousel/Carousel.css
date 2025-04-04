@@ -3,6 +3,7 @@
     width: 100%;
     overflow: hidden;
     gap: 1rem;
+    mask-image: linear-gradient(to right, black 97%, transparent 100%);
 
     .carousel__header {
         display: flex;

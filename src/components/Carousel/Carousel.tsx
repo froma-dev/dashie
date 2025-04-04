@@ -44,7 +44,6 @@ const Carousel = ({ className = "", data, title }: CarouselProps) => {
           entry.target.firstElementChild?.getBoundingClientRect().width || 0;
         const carouselItemWidthWithGap = carouselItemWidth + ITEM_GAP_PX;
 
-        console.log("cc--->", carouselItemWidth);
         return {
           ...prev,
           carouselStripWidth: entry.contentRect.width,
