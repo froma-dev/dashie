@@ -36,7 +36,7 @@ const HeroCarousel = (props: HeroCarouselProps) => {
   };
 
   return (
-    <Hero isCarousel {...props} className="carousel">
+    <Hero isCarousel {...props} className="hero--carousel">
       <div className="hero-container">
         {heroes.map((hero) => (
           <div
