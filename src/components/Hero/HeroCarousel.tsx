@@ -1,10 +1,10 @@
 import Hero, { type HeroProps } from "./Hero";
 import "./HeroCarousel.css";
-import { useState } from "react";
-import HeroCarouselNav from "./HeroCarouselNav";
 import { classNamesBuilder } from "../../utils/utils";
 import BasicNavigator from "../Navigator/BasicNavigator";
 import BulletIndicator from "../BulletIndicator/BulletIndicator";
+import useAutoPlay from "./hooks/useAutoPlay";
+import { USE_AUTOPLAY_INTERVAL_MS, USE_AUTOPLAY_MAX_STEPS } from "../../config";
 
 interface HeroCarouselProps extends HeroProps {
   data: HeroProps[];
@@ -12,21 +12,26 @@ interface HeroCarouselProps extends HeroProps {
 
 const HeroCarousel = (props: HeroCarouselProps) => {
   const dataLength = props.data.length;
-  const [current, setCurrent] = useState(0);
+  const {
+    currentIndex,
+    handleNavigation,
+    handlePause,
+    handleResume,
+    countdown,
+  } = useAutoPlay(
+    {
+      autoplay: true,
+      intervalMs: USE_AUTOPLAY_INTERVAL_MS,
+      maxSteps: USE_AUTOPLAY_MAX_STEPS,
+    },
+    [dataLength]
+  );
 
-  const handleNavigation = async (dir: string) => {
-    if (dir === "previous") {
-      setCurrent((prev) => (prev === 0 ? dataLength - 1 : prev - 1));
-    } else if (dir === "next") {
-      setCurrent((prev) => (prev === dataLength - 1 ? 0 : prev + 1));
-    }
-  };
-
-  const prevIndex = (current - 1 + dataLength) % dataLength;
-  const nextIndex = (current + 1) % dataLength;
+  const prevIndex = (currentIndex - 1 + dataLength) % dataLength;
+  const nextIndex = (currentIndex + 1) % dataLength;
 
   const prevHero = props.data[prevIndex];
-  const currentHero = props.data[current];
+  const currentHero = props.data[currentIndex];
   const nextHero = props.data[nextIndex];
   const heroes = [prevHero, nextHero, currentHero];
 
@@ -37,9 +42,15 @@ const HeroCarousel = (props: HeroCarouselProps) => {
     return "";
   };
 
+  console.log("countdown", countdown);
+
   return (
     <Hero isCarousel {...props} className="hero--carousel">
-      <div className="hero-container">
+      <div
+        className="hero-container"
+        onMouseEnter={handlePause}
+        onMouseLeave={handleResume}
+      >
         {heroes.map((hero) => (
           <div
             className={classNamesBuilder("hero__content", getHeroClass(hero))}
@@ -66,7 +77,7 @@ const HeroCarousel = (props: HeroCarouselProps) => {
           {Array.from({ length: dataLength }).map((_, index) => (
             <BulletIndicator
               key={index}
-              className={index === current ? "active" : ""}
+              className={index === currentIndex ? "active" : ""}
             />
           ))}
         </div>
