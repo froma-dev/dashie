@@ -6,7 +6,6 @@ import { type DraggableCardProps } from "./components/Card/DraggableCard";
 import Header from "./components/Header/Header";
 import HeroCarousel, { type HeroProps } from "./components/Hero/HeroCarousel";
 import Carousel, { CarouselItemProps } from "./components/Carousel/Carousel";
-import CarouselItem from "./components/Carousel/CarouselItem";
 
 const cards = [
   { id: "card-1", title: "Card", description: "Card description" },
@@ -119,7 +118,11 @@ function App() {
   return (
     <>
       <Header />
-      <Carousel data={carouselItems} title="Carousel" />
+      <Carousel
+        data={carouselItems}
+        config={{ interactiveItems: 6 }}
+        title="Carousel"
+      />
       <HeroCarousel data={heros} />
       <Card id={"card-9"} title="Card title" description="Card description" />
       <Link href="https://github.com/">Link</Link>
