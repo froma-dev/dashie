@@ -3,6 +3,8 @@ import "./HeroCarousel.css";
 import { useState } from "react";
 import HeroCarouselNav from "./HeroCarouselNav";
 import { classNamesBuilder } from "../../utils/utils";
+import BasicNavigator from "../Navigator/BasicNavigator";
+import BulletIndicator from "../BulletIndicator/BulletIndicator";
 
 interface HeroCarouselProps extends HeroProps {
   data: HeroProps[];
@@ -55,15 +57,20 @@ const HeroCarousel = (props: HeroCarouselProps) => {
           </div>
         ))}
       </div>
-      <HeroCarouselNav
-        onClick={handleNavigation}
-        onKeyDown={handleNavigation}
-        onAutoPlay={() => handleNavigation("next")}
-        length={dataLength}
-        current={current}
-        autoPlayIntervalMs={1000}
-        autoPlayMaxSteps={5}
-      />
+      <div className="hero__navigation">
+        <BasicNavigator
+          onClick={handleNavigation}
+          onKeyDown={handleNavigation}
+        />
+        <div className="indicators-wrapper">
+          {Array.from({ length: dataLength }).map((_, index) => (
+            <BulletIndicator
+              key={index}
+              className={index === current ? "active" : ""}
+            />
+          ))}
+        </div>
+      </div>
     </Hero>
   );
 };

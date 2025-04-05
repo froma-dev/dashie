@@ -1,0 +1,19 @@
+.indicators-wrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.bullet-indicator {
+    display: flex;
+    width: 1.15rem;
+    height: 1.15rem;
+    border-radius: 50%;
+    background-color: var(--nav-bullet-background);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    transform: scale(1);
+
+    &.active {
+        transform: scale(1.3);
+        background-color: var(--nav-bullet-value-background);
+    }
+}
