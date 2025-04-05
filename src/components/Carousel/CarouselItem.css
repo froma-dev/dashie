@@ -12,6 +12,10 @@
         }
     }
 
+    &.origin-left {
+        transform-origin: left;
+    }
+
     img {
         object-fit: cover;
         aspect-ratio: 640/480;

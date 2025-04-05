@@ -136,10 +136,11 @@ const Carousel = ({
         }}
         ref={refCarouselContent}
       >
-        {data.map((carouselItem) => (
+        {data.map((carouselItem, index) => (
           <CarouselItem
             key={carouselItem.id}
             {...carouselItem}
+            className={index % (config?.interactiveItems || 1) === 0 ? "origin-left" : ""}
             style={{
               flex: `1 0 ${carouselComputedValues.carouselItemWidth}px`,
             }}

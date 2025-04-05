@@ -1,3 +1,4 @@
+import { classNamesBuilder } from "../../utils/utils";
 import "./CarouselItem.css";
 
 interface CarouselItemProps {
@@ -6,6 +7,7 @@ interface CarouselItemProps {
   description?: string;
   image: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 const CarouselItem = ({
@@ -13,9 +15,11 @@ const CarouselItem = ({
   description,
   image,
   style,
+  className = "",
 }: CarouselItemProps) => {
+  const classNames = classNamesBuilder("carousel__item", className);
   return (
-    <div className="carousel__item" style={style}>
+    <div className={classNames} style={style}>
       <img src={image} alt={title} />
       <h3>{title}</h3>
       {description && <p>{description}</p>}
