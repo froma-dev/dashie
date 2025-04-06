@@ -15,7 +15,7 @@ const DEFAULT_AUTOPLAY = false;
 const DEFAULT_COUNTDOWN_INTERVAL_MS = 1000;
 const DEFAULT_COUNTDOWN = 1000;
 
-const useAutoPlay = (
+const useNavigation = (
   {
     autoplay = DEFAULT_AUTOPLAY,
     intervalMs = DEFAULT_INTERVAL_MS,
@@ -25,9 +25,8 @@ const useAutoPlay = (
 ) => {
   const [currentIndex, setCurrentIndex] = useState(DEFAULT_CURRENT_INDEX);
   const [countdown, setCountdown] = useState(DEFAULT_COUNTDOWN);
-  const [paused, setPaused] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const handleAutoPlay = useCallback(() => {
-    console.log("handleAutoPlay----------->", paused);
     setCurrentIndex((prev) => (prev === maxSteps - 1 ? 0 : prev + 1));
   }, [maxSteps]);
   const handleNavigation = useCallback(
@@ -42,47 +41,43 @@ const useAutoPlay = (
   );
   const handlePause = useCallback(() => {
     console.log("handlePause");
-    if (autoplay) setPaused(() => true);
+    if (autoplay) setIsPaused(() => true);
   }, [autoplay]);
   const handleResume = useCallback(() => {
     console.log("handleResume");
-    if (autoplay) setPaused(() => false);
+    if (autoplay) setIsPaused(() => false);
   }, [autoplay]);
 
+  // autoplay effect
   useEffect(() => {
-    console.log("useEffect");
-    if (autoplay && !paused) {
+    if (autoplay && !isPaused) {
       const autoplayInterval = setInterval(() => handleAutoPlay(), intervalMs);
+      return () => clearInterval(autoplayInterval);
+    }
+  }, [autoplay, isPaused, handleAutoPlay, intervalMs]);
+
+  // countdown effect
+  useEffect(() => {
+    if (autoplay && !isPaused) {
       const countdownInterval = setInterval(() => {
-        console.log("-->setCountdown", paused);
-        setCountdown((prevMs: number) =>
-          prevMs === intervalMs ? DEFAULT_COUNTDOWN : prevMs + 1000
-        );
+        console.log("-->setCountdown", isPaused);
+        setCountdown((prevMs: number) => {
+          if (prevMs >= intervalMs) return DEFAULT_COUNTDOWN;
+          return prevMs + DEFAULT_COUNTDOWN_INTERVAL_MS;
+        });
       }, DEFAULT_COUNTDOWN_INTERVAL_MS);
 
-      return () => {
-        clearInterval(autoplayInterval);
-        clearInterval(countdownInterval);
-
-        if (autoplay)
-          setCountdown((prev) => {
-            console.log("--->setCountdown effect");
-            console.log("prev", prev);
-            console.log("paused", paused);
-            console.log("-----");
-            return prev;
-          });
-      };
+      return () => clearInterval(countdownInterval);
     }
-  }, [intervalMs, handleAutoPlay, paused, autoplay]);
+  }, [intervalMs, handleAutoPlay, isPaused, autoplay]);
 
   return {
     currentIndex,
     handleNavigation,
     handlePause,
-    countdown,
     handleResume,
+    countdown,
   };
 };
 
-export default useAutoPlay;
+export default useNavigation;

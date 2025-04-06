@@ -3,8 +3,10 @@ import "./HeroCarousel.css";
 import { classNamesBuilder } from "../../utils/utils";
 import BasicNavigator from "../Navigator/BasicNavigator";
 import BulletIndicator from "../BulletIndicator/BulletIndicator";
-import useAutoPlay from "./hooks/useAutoPlay";
+import useAutoPlay from "./hooks/useNavigation";
 import { USE_AUTOPLAY_INTERVAL_MS, USE_AUTOPLAY_MAX_STEPS } from "../../config";
+import Countdown from "../Countdown/Countdown";
+import { useMemo } from "react";
 
 interface HeroCarouselProps extends HeroProps {
   data: HeroProps[];
@@ -27,20 +29,30 @@ const HeroCarousel = (props: HeroCarouselProps) => {
     [dataLength]
   );
 
-  const prevIndex = (currentIndex - 1 + dataLength) % dataLength;
-  const nextIndex = (currentIndex + 1) % dataLength;
+  const { prevHero, currentHero, nextHero, heroes } = useMemo(() => {
+    const prevIndex = (currentIndex - 1 + dataLength) % dataLength;
+    const nextIndex = (currentIndex + 1) % dataLength;
+    const prevHero = props.data[prevIndex];
+    const currentHero = props.data[currentIndex];
+    const nextHero = props.data[nextIndex];
 
-  const prevHero = props.data[prevIndex];
-  const currentHero = props.data[currentIndex];
-  const nextHero = props.data[nextIndex];
-  const heroes = [prevHero, nextHero, currentHero];
+    return {
+      prevHero,
+      currentHero,
+      nextHero,
+      heroes: [prevHero, nextHero, currentHero],
+    };
+  }, [currentIndex, dataLength, props.data]);
 
-  const getHeroClass = (hero: HeroProps) => {
-    if (hero.id === currentHero.id) return "active";
-    if (hero.id === prevHero.id) return "prev";
-    if (hero.id === nextHero.id) return "next";
-    return "";
-  };
+  const getHeroClass = useMemo(
+    () => (hero: HeroProps) => {
+      if (hero.id === currentHero.id) return "active";
+      if (hero.id === prevHero.id) return "prev";
+      if (hero.id === nextHero.id) return "next";
+      return "";
+    },
+    [currentHero, prevHero, nextHero]
+  );
 
   console.log("countdown", countdown);
 
