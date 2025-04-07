@@ -4,8 +4,7 @@ import { classNamesBuilder } from "../../utils/utils";
 import BasicNavigator from "../Navigator/BasicNavigator";
 import BulletIndicator from "../BulletIndicator/BulletIndicator";
 import useAutoPlay from "./hooks/useNavigation";
-import { USE_AUTOPLAY_INTERVAL_MS, USE_AUTOPLAY_MAX_STEPS } from "../../config";
-import Countdown from "../Countdown/Countdown";
+import { USE_AUTOPLAY_INTERVAL_MS } from "../../config";
 import { useMemo } from "react";
 
 interface HeroCarouselProps extends HeroProps {
@@ -19,12 +18,10 @@ const HeroCarousel = (props: HeroCarouselProps) => {
     handleNavigation,
     handlePause,
     handleResume,
-    countdown,
   } = useAutoPlay(
     {
       autoplay: true,
       intervalMs: USE_AUTOPLAY_INTERVAL_MS,
-      maxSteps: USE_AUTOPLAY_MAX_STEPS,
     },
     [dataLength]
   );
@@ -53,8 +50,6 @@ const HeroCarousel = (props: HeroCarouselProps) => {
     },
     [currentHero, prevHero, nextHero]
   );
-
-  console.log("countdown", countdown);
 
   return (
     <Hero isCarousel {...props} className="hero--carousel">
