@@ -1,9 +1,18 @@
+# Dashie
 
+A modern web application to build custom components with React and TypeScript.
 
-## Theme
-* A sophisticated dark theme base using deep blues and purples
-* Bright, vibrant accent colors for interactive elements
-* Multiple background shades for depth and hierarchy
-* Complementary text colors for different emphasis levels
-* Beautiful gradients for buttons and highlights
-* Consistent shadow variables for depth
+## Features
+
+- Modern UI built with React 19 and TypeScript
+- Customizable components with Tabler Icons
+- Responsive design with CSS variables
+- Fast development with Vite
+
+## Tech Stack
+
+- **Frontend**: React 19, TypeScript
+- **Styling**: CSS with Fontsource for custom fonts
+- **Icons**: @tabler/icons-react
+- **Build Tool**: Vite
+- **Type Checking**: TypeScript
