@@ -16,3 +16,6 @@ A modern web application to build custom components with React and TypeScript.
 - **Icons**: @tabler/icons-react
 - **Build Tool**: Vite
 - **Type Checking**: TypeScript
+
+![Cards](./public/cards.png)
+![Carousel](./public/home.png)
