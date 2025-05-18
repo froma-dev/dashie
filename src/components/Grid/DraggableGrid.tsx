@@ -13,11 +13,11 @@ const DraggableGrid = ({ data, auto = false }: DraggableGridProps) => {
   const [isDroppingId, setIsDroppingId] = useState<string | null>(null);
   const [gridData, setGridData] = useState(data);
 
-  const handleDragStart = (event: React.DragEvent) => {
+  const handleDragStart = () => {
     setIsDragging(true);
   };
 
-  const handleDragEnd = (event: React.DragEvent) => {
+  const handleDragEnd = () => {
     setIsDragging(false);
   };
 
