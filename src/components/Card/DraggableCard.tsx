@@ -11,7 +11,7 @@ const DraggableCard = (props: DraggableCardProps) => {
   const [isDropTarget, setIsDropTarget] = useState(false);
   const { id } = props;
 
-  const handleDragEnd = (event: React.DragEvent) => {
+  const handleDragEnd = () => {
     setIsDragging(false);
     setIsDropTarget(false);
   };
@@ -19,7 +19,7 @@ const DraggableCard = (props: DraggableCardProps) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
   };
-  const handleDragEnter = (event: React.DragEvent) => {
+  const handleDragEnter = () => {
     setIsDropTarget(true);
   };
   const handleDragLeave = (event: React.DragEvent) => {
@@ -34,7 +34,7 @@ const DraggableCard = (props: DraggableCardProps) => {
     event.dataTransfer.effectAllowed = "move";
     setIsDragging(true);
   };
-  const handleDrop = (event: React.DragEvent) => {
+  const handleDrop = () => {
     setIsDropTarget(false);
   };
 
