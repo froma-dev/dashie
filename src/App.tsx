@@ -120,7 +120,7 @@ function App() {
       <Header />
       <Carousel
         data={carouselItems}
-        config={{ interactiveItems: 4 }}
+        config={{ interactiveItems: 3 }}
         title="Carousel"
       />
       <HeroCarousel data={heros} />
